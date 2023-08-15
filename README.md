@@ -59,7 +59,37 @@ router.beforeEach((to, from, next) => {
 21.商品详情页
     封装api发送请求获取数据
     数据繁杂 先打印出来 再解构
-22.加入购物车弹层            
+22.加入购物车弹层
+    van-action-sheet 组件
+23.数字框组件
+    v-modle双向绑定 = ：vlaue @input
+    数据父传子
+    修改 子传父
+    this.$emit('input', value)     
+24.加入购物车 - 判断 token 登录提示
+    分析：
+        1.若存在：继续加入购物车操作
+        2.不存在：提示用户未登录，引导到登录页     
+    Dialog组件弹出确认框
+    登录后需要跳转到之前的商品详情页面 所以在跳转时传参（当前页面参数）this.$route.fullPath
+    需要在登录页面进行判断是否携带参数
+    this.$router.replace 和 push 的区别是：是否会产生历史记录
+    左下角购物车角标商品数量
+        点击加入购物车发送请求
+        请求需要请求头携带token 在请求拦截器统一添加
+        获取返回的数据totalCount 渲染
+25.购物车-构建vuex模块 获取数据
+   1.创建vuex模块 存数据
+   2.动态渲染
+   3.getters: 总数 选中数 价格 动态设置disabled属性（:class） 保留两小数 toFixed(2)
+   4.全选反选功能
+      小选带动全选
+      全选带动小选
+   5.数字框修改数量
+     既想拿到形参 又要函数调用传参 使用箭头函数 （value）=> Fn(value,a,b)   
+     封装api接口 后台更新
+     vuex中aciton封装函数 页面dispatch调用
+     先让页面视图更新 后让后台更新 修改obj.goods_num
 ```
 ## Project setup
 ```
