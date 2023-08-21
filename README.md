@@ -1,19 +1,57 @@
 # vue-shopping
 ```
 1.基于VueCli创建项目
-2.使用vant组件库
+    新增目录src/api（存接口模块）
+    src/擽utils（存自己封装的方法） 
+2.引入vant组件库
+    官方文档 https://vant-contrib.gitee.io/vant/v2/#/zh-CN/
+    按需导入
+        1.安装
+        2.yarn add babel-plugin-import -D 插件
+        3.在babel.config.js中配置
+            module.exports = {
+              presets: [
+                '@vue/cli-plugin-babel/preset'
+              ],
+              plugins: [
+                ['import', {
+                  libraryName: 'vant',
+                  libraryDirectory: 'es',
+                  style: true
+                }, 'vant']
+              ]
+            }
+        4.在main.js中注册使用
 3.postcss插件 实现vw适配
-yarn add postcss-px-to-viewport@1.1.1 -D
-新建postcss的配置文件postcss.config.js
+    yarn add postcss-px-to-viewport@1.1.1 -D
+    官方说明：https://vant-contrib.gitee.io/vant/v2/#/zh-CN/advanced-usage
+    项目根目录， 新建postcss的配置文件postcss.config.js
+         postcss.config.js
+            module.exports = {
+              plugins: {
+                'postcss-px-to-viewport': {
+                  viewportWidth: 375,
+                },
+              },
+            };
 4.一级路由配置
 5.二级路由配置
-路由出口 <router-view></router-view>
+     children
+     路由出口 <router-view></router-view>
 6.request模块 - axios封装
-实例 请求拦截器 响应拦截器 
+    接口文档：https://apifox.com/apidoc/shared-12ab6b18-adc2-444c-ad11-0e60f5693f66/doc-2221080
+    利用 axios.create 创建一个自定义的 axios 来使用
+        http://www.axios-js.com/zh-cn/docs/#axios-create-config
+    创建实例 请求拦截器 响应拦截器 
 7.完成获取图形验证码
 8.封装api接口-图形验证码
-9.toast 轻提示
+9.使用组件 toast 轻提示
 10.短信验证倒计时 定时器
+     setInterval
+     离开页面销毁定时器
+     destroyed () {
+      clearInterval(this.timer)
+    } 
 11.封装api接口 - 登录功能
 12.响应拦截器统一处理错误提示
 13.将登录权证信息存入 vuex
@@ -90,6 +128,20 @@ router.beforeEach((to, from, next) => {
      封装api接口 后台更新
      vuex中aciton封装函数 页面dispatch调用
      先让页面视图更新 后让后台更新 修改obj.goods_num
+     编辑 删除 空购物车处理
+        1.先获取要删除的id 从之前封装好的选中项数组.map可获取
+        2.发送请求删除
+        3.重新获取最新的list 更新页面数据 
+26.mixins 复用 - 处理登录确认框的弹出      
+    1 新建一个 mixin 文件 mixins/loginConfirm.js  
+    2 页面中导入，混入方法
+    import loginConfirm from '@/mixins/loginConfirm'
+    export default {
+      name: 'ProDetail',
+      mixins: [loginConfirm],
+      ...
+    }
+27.路由懒加载    
 ```
 ## Project setup
 ```
